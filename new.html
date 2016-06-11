@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="made by BMap" />
+    <meta name="description" content="Powered by CAI" />
+    <title>Test1</title>
+    <!--引用百度地图API-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=oUSGblGsiUksuapTRVGXLwMV"></script>
+  </head>
+  
+  <body>
+    <!--百度地图容器-->
+    <div style="width:90%;height:700px;border:#ccc solid 1px;font-size:12px;margin-left:5%" id="map"></div>
+    <div style="float left"><input style="width:300px;height:50px;border:#ccc solid 1px;margin-left:5%;float:left" id="test"/>
+    <div style="width:50px;height:50px;float:left;border:#ccc solid 1px" onclick="search()"></div></div>
+  <script type="text/javascript">
+    //创建和初始化地图函数：
+    function initMap(){
+      createMap();//创建地图
+      setMapEvent();//设置地图事件
+      addMapControl();//向地图添加控件
+      addMapOverlay();//向地图添加覆盖物
+    }
+    function createMap(){ 
+      map = new BMap.Map("map"); 
+      map.centerAndZoom(new BMap.Point(105.510000,32.300000),5);
+    }
+    function setMapEvent(){
+      map.enableScrollWheelZoom();
+      map.enableKeyboard();
+      map.enableDragging();
+      map.enableDoubleClickZoom()
+    }
+    function addClickHandler(target,window){
+      target.addEventListener("click",function(){
+        target.openInfoWindow(window);
+      });
+    }
+    function addOverHandler(target,window){
+      target.addEventListener("mouseover",function(){
+        target.openInfoWindow(window);
+      });
+    }
+    function addOutHandler(target,window){
+      target.addEventListener('mouseout',function(){
+        target.closeInfoWindow();
+      });
+    }
+    function addMapOverlay(){
+      var markers = [
+        {content:"",title:"002",imageOffset: {width:0,height:3},position:{lat:11.630000,lng:104.840000}}
+      ];
+      for(var index = 0; index < markers.length; index++ ){
+        var point = new BMap.Point(markers[index].position.lng,markers[index].position.lat);
+        var marker = new BMap.Marker(point,{icon:new BMap.Icon("http://api.map.baidu.com/lbsapi/createmap/images/icon.png",new BMap.Size(20,25),{
+          imageOffset: new BMap.Size(markers[index].imageOffset.width,markers[index].imageOffset.height)
+        })});
+        var label = new BMap.Label(markers[index].title,{offset: new BMap.Size(25,5)});
+	label.setStyle({
+	border:"0"
+});
+        var opts = "编号：002</br>"+"2015年1月4日</br>"+"北纬11.63°, 东经104.84°</br>"+"柬埔寨金边</br>"+"画说 X Children Development Organization</br>"+
+          "<img style='float:left' id='img' src='http://mmbiz.qpic.cn/mmbiz/8I2RqFbicLKvdzdReib0MYhYmXhdJUA8IgD8dib9oGDKORXFQHa93X8qmYd9pem1OIPyMHoNWMSGcdwuUmKr8esJA/640?wxfrom=5' width='240px' height='180px'/>" ;
+        var infoWindow = new BMap.InfoWindow(opts);
+        marker.setLabel(label);
+        addClickHandler(marker,infoWindow);
+        addOverHandler(marker,infoWindow);
+        addOutHandler(marker);
+        map.addOverlay(marker);
+        marker.disableDragging();    
+        marker.addEventListener("dragend", function(e){    
+ alert("当前位置：" + e.point.lng + ", " + e.point.lat);    
+})
+      };
+            var markers1 = [
+        {content:"",title:"001",imageOffset: {width:0,height:3},position:{lat:25.950000,lng:110.010000}}
+      ];
+      for(var index = 0; index < markers1.length; index++ ){
+        var point1 = new BMap.Point(markers1[index].position.lng,markers1[index].position.lat);
+        var marker1= new BMap.Marker(point1,{icon:new BMap.Icon("http://api.map.baidu.com/lbsapi/createmap/images/icon.png",new BMap.Size(20,25),{
+          imageOffset: new BMap.Size(markers1[index].imageOffset.width,markers1[index].imageOffset.height)
+        })});
+        var label1 = new BMap.Label(markers1[index].title,{offset: new BMap.Size(25,5)});
+	label1.setStyle({
+	border:"0"
+});
+        var opts1 = "编号：001</br>"+"2015年1月6日</br>"+"北纬25.95°, 东经110.01°</br>"+
+"广西壮族自治区桂林市龙胜各族自治县新寨村</br>"+
+"新寨希望小学</br>"+
+          "<img style='float:left' id='img1' src='http://mmbiz.qpic.cn/mmbiz/8I2RqFbicLKvdzdReib0MYhYmXhdJUA8IgzL8dib95Lgcia7ao2OLjBwoTBH5sbvwHR7jRSNyMuhLdbWQpZzoxCJkQ/640?wxfrom=5' width='240px' height='180px'/>" ;
+        var infoWindow = new BMap.InfoWindow(opts1);
+        marker1.setLabel(label1);
+        addClickHandler(marker1,infoWindow);
+        addOverHandler(marker1,infoWindow);
+        addOutHandler(marker1);
+        map.addOverlay(marker1);
+        marker1.disableDragging();    
+        marker1.addEventListener("dragend", function(e){    
+ alert("当前位置：" + e.point.lng + ", " + e.point.lat);    
+})
+      };
+var markers2 = [
+        {content:"",title:"003",imageOffset: {width:0,height:3},position:{lat:26.060000,lng:118.780000}}
+      ];
+      for(var index = 0; index < markers2.length; index++ ){
+        var point2 = new BMap.Point(markers2[index].position.lng,markers2[index].position.lat);
+        var marker2= new BMap.Marker(point2,{icon:new BMap.Icon("http://api.map.baidu.com/lbsapi/createmap/images/icon.png",new BMap.Size(20,25),{
+          imageOffset: new BMap.Size(markers2[index].imageOffset.width,markers2[index].imageOffset.height)
+        })});
+        var label2 = new BMap.Label(markers2[index].title,{offset: new BMap.Size(25,5)});
+	label2.setStyle({
+	border:"0"
+});
+        var opts2 = "编号：003</br>"+"2015年1月17日</br>"+"北纬26.06°, 东经118.78°</br>"+
+"福建省福州市闽清县塔庄镇</br>"+
+"画说 X 感恩福建</br>"+
+          "<img style='float:left' id='img2' src='http://mmbiz.qpic.cn/mmbiz/8I2RqFbicLKvdzdReib0MYhYmXhdJUA8Ig3L1VRBPyGJE0lw0XaerRsfv0x5GMjuTnlFesGia9GewhYaqw5geXZvw/640?wxfrom=5' width='240px' height='180px'/>" ;
+        var infoWindow = new BMap.InfoWindow(opts2);
+        marker2.setLabel(label2);
+        addClickHandler(marker2,infoWindow);
+        addOverHandler(marker2,infoWindow);
+        addOutHandler(marker2);
+        map.addOverlay(marker2);
+        marker2.disableDragging();    
+        marker2.addEventListener("dragend", function(e){    
+ alert("当前位置：" + e.point.lng + ", " + e.point.lat);    
+})
+      };
+var markers3 = [
+        {content:"",title:"004",imageOffset: {width:0,height:3},position:{lat:24.490000,lng:118.140000}}
+      ];
+      for(var index = 0; index < markers3.length; index++ ){
+        var point3 = new BMap.Point(markers3[index].position.lng,markers3[index].position.lat);
+        var marker3= new BMap.Marker(point3,{icon:new BMap.Icon("http://api.map.baidu.com/lbsapi/createmap/images/icon.png",new BMap.Size(20,25),{
+          imageOffset: new BMap.Size(markers3[index].imageOffset.width,markers3[index].imageOffset.height)
+        })});
+        var label3 = new BMap.Label(markers3[index].title,{offset: new BMap.Size(25,5)});
+	label3.setStyle({
+	border:"0"
+});
+        var opts3 = "编号：004</br>"+"2015年1月31日</br>"+"北纬24.49°,东经118.14°</br>"+
+"福建省厦门市湖里区后埔民办小学</br>"+
+"画说 X 厦大AIESEC</br>"+
+          "<img style='float:left' id='img3' src='http://mmbiz.qpic.cn/mmbiz/8I2RqFbicLKvdzdReib0MYhYmXhdJUA8IgRNAjYWTAsibUR8IEpIVezRJfpeLEeiaEOz9eYtn9SZPhZVhs35ib463hg/640?wxfrom=5' width='240px' height='180px'/>" ;
+        var infoWindow = new BMap.InfoWindow(opts3);
+        marker3.setLabel(label3);
+        addClickHandler(marker3,infoWindow);
+        addOverHandler(marker3,infoWindow);
+        addOutHandler(marker3);
+        map.addOverlay(marker3);
+        marker3.disableDragging();    
+        marker3.addEventListener("dragend", function(e){    
+ alert("当前位置：" + e.point.lng + ", " + e.point.lat);    
+})
+      };
+    }
+    function test1(){
+      var content = "编号：001</br>"+"2015年1月6日</br>"+"北纬25.95°, 东经110.01°</br>"+
+"广西壮族自治区桂林市龙胜各族自治县新寨村</br>"+
+"新寨希望小学</br>"+
+          "<img style='float:left' id='img1' src='http://mmbiz.qpic.cn/mmbiz/8I2RqFbicLKvdzdReib0MYhYmXhdJUA8IgzL8dib95Lgcia7ao2OLjBwoTBH5sbvwHR7jRSNyMuhLdbWQpZzoxCJkQ/640?wxfrom=5' width='240px' height='180px'/>";
+        var position1 = new BMap.Point(110.010000,25.950000);
+        var infoWindow = new BMap.InfoWindow(content);
+        map.openInfoWindow(infoWindow,position1);
+    }
+    function search(){
+      var content = document.getElementById("test");
+      switch(content.value)
+      {
+        case '001':
+          test1();
+          break;
+        default:
+          alert("输入错误，请输入序号");
+          break;
+        }
+        }
+    //向地图添加控件
+    function addMapControl(){
+      var scaleControl = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+      scaleControl.setUnit(BMAP_UNIT_IMPERIAL);
+      map.addControl(scaleControl);
+      var navControl = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+      map.addControl(navControl);
+      var overviewControl = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:true});
+      map.addControl(overviewControl);
+    }
+    var map;
+      initMap();
+  </script>
+</html>	
